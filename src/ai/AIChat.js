@@ -67,7 +67,7 @@ const AIChat = () => {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer e4b94444-370b-40e4-a2cb-46b248bfe5be` 
+          'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}` 
         },
         body: JSON.stringify({
           model: 'doubao-seed-1-8-251228', 

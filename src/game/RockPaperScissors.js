@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Button, message } from "antd";
 
-// 定义一个RockPaperScissors组件，用于实现石头剪刀布的游戏
 const RockPaperScissors = () => {
   const [userChoice, setUserChoice] = useState(null);
   const [computerChoice, setComputerChoice] = useState(null);
   const [result, setResult] = useState(null);
 
-  // 定义一个函数，用于处理用户点击按钮的事件
   const handleClick = (choice) => {
     // 随机生成电脑的选择
     const choices = ["石头", "剪刀", "布"];
@@ -21,10 +19,8 @@ const RockPaperScissors = () => {
     setComputerChoice(randomChoice);
     setResult(outcome);
 
-    // *** 优化点：使用 Ant Design 的 message 组件显示结果 ***
-    let msgType = 'info';
-    let msgContent = `你的选择: ${choice}, 电脑的选择: ${randomChoice}. 结果: ${outcome}!`;
-
+    // 使用 message 组件显示结果
+    const msgContent = `你的选择: ${choice}, 电脑的选择: ${randomChoice}. 结果: ${outcome}!`;
     if (outcome === '你赢了') {
       message.success(msgContent);
     } else if (outcome === '电脑赢了') {
@@ -32,10 +28,8 @@ const RockPaperScissors = () => {
     } else {
       message.info(msgContent);
     }
-    // ****************************************************
   };
 
-  // 定义一个函数，用于判断游戏的结果
   const judge = (userChoice, computerChoice) => {
     // 如果用户和电脑的选择相同，返回平局
     if (userChoice === computerChoice) {
@@ -53,15 +47,10 @@ const RockPaperScissors = () => {
     return "电脑赢了";
   };
 
-  // 定义一个函数，用于处理用户重新开始的事件
   const handleRestart = () => {
-    // 重置用户的选择
     setUserChoice(null);
-    // 重置电脑的选择
     setComputerChoice(null);
-    // 重置游戏的结果
     setResult(null);
-    // 可选：提示游戏已重置
     message.config({
         top: 24, // 调整提示位置，避免遮挡
         duration: 2,
@@ -75,7 +64,7 @@ const RockPaperScissors = () => {
       <p>请从石头、剪刀、布中选择一个，看看你能否赢过电脑</p>
       
       <div style={{ marginBottom: "20px" }}>
-        {/* 如果游戏没有结束，显示三个按钮，分别表示石头、剪刀、布 */}
+        {/* 游戏开始：选择阶段 */}
         {!result && (
           <>
             <Button type="primary" onClick={() => handleClick("石头")}>
@@ -90,7 +79,7 @@ const RockPaperScissors = () => {
           </>
         )}
         
-        {/* 游戏结束时显示结果和重新开始按钮 */}
+        {/* 游戏结束：显示结果 */}
         {result && (
           <div>
             <p>你的选择是：**{userChoice}**</p>
@@ -103,7 +92,6 @@ const RockPaperScissors = () => {
         )}
       </div>
 
-      {/* 可以在未选择时显示提示 */}
       {!result && userChoice !== null && (
         <p style={{ color: '#1890ff' }}>请选择，开始游戏！</p>
       )}
@@ -112,5 +100,4 @@ const RockPaperScissors = () => {
   );
 };
 
-// 导出RockPaperScissors组件
 export default RockPaperScissors;
