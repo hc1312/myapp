@@ -4,13 +4,9 @@ import ReactDice, { ReactDiceRef } from "react-dice-complete";
 
 // 定义一个DiceGame组件，用于实现掷骰子的游戏
 const DiceGame = () => {
-  // 状态变量，用于存储用户输入的6个动作
   const [actions, setActions] = useState(["", "", "", "", "", ""]);
-  //状态变量，用于存储骰子的点数
-  const [dice, setDice] = useState(0); // 改为0
-  // 状态变量，用于存储游戏是否开始
+  const [dice, setDice] = useState(0); 
   const [isStarted, setIsStarted] = useState(false);
-  // ref变量，用于获取ReactDice组件的实例
   const reactDice = useRef < ReactDiceRef > (null);
 
   // 定义一个函数，用于处理用户输入的变化
@@ -25,7 +21,7 @@ const DiceGame = () => {
     setActions(newActions);
   };
 
-  // 定义一个函数，用于处理用户开始游戏的事件
+  // 开始游戏
   const handleStart = () => {
     // 遍历动作的数组，判断是否有空值
     for (let i = 0; i < actions.length; i++) {
@@ -35,19 +31,16 @@ const DiceGame = () => {
         return;
       }
     }
-    // 如果没有空值，更新游戏状态
     setIsStarted(true);
-    // 重置骰子的状态
-    setDice(1); // 加上这一行
+    setDice(1); 
   };
 
   // 处理用户掷骰子的事件
   const handleRoll = () => {
-    // 调用ReactDice组件的rollAll方法，随机生成一个骰子的点数
     reactDice.current?.rollAll();
   };
 
-  // 定义一个函数，用于处理骰子掷完后的回调
+  // 用于处理骰子掷完后的回调
   const rollDone = (totalValue, values) => {
     // 设置骰子的状态
     setDice(totalValue); // 改为totalValue

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Card, Collapse, Progress, Alert, Button, Radio, message, Form, Checkbox, Input,Modal, Typography } from "antd";
-import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
-import moment from "moment";
+import { SmileOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
-const { Title, Paragraph } = Typography;
+const { Paragraph } = Typography;
 const { TextArea } = Input;
 const Yala = () => {
     const [visible, setVisible] = useState(false);
-    const [date, setDate] = useState(moment());
 
     const showModal = () => {
         setVisible(true);
@@ -18,9 +16,6 @@ const Yala = () => {
         setVisible(false);
     };
 
-    const handleDateChange = (value) => {
-        setDate(value);
-    };
     const [form] = Form.useForm();
 
     const handleSubmit = (values) => {

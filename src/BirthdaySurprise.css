@@ -1,0 +1,250 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'PingFang SC', 'Segoe UI', sans-serif;
+}
+
+/* 整体背景 */
+.birthday-container {
+  height: 100vh;
+  background: linear-gradient(-45deg, #ffd6e8, #ffeef4, #ffafcc, #f8edeb);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  padding: 16px;
+}
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* 卡片 */
+.card {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 24px;
+  padding: 36px 28px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  animation: floatCard 3s ease-in-out infinite;
+  max-width: 380px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  max-width: 380px;
+  /* ⭐ 卡片最大宽度 */
+  margin: 0 auto;
+  /* 居中 */
+}
+
+/* 蛋糕 */
+.cake {
+  font-size: 56px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.candle {
+  margin-left: 6px;
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.candle.lit {
+  filter: drop-shadow(0 0 12px #ffb703);
+  transform: scale(1.15);
+}
+
+/* 文字 */
+.card h1 {
+  text-shadow: 0 0 10px rgba(255, 77, 109, 0.3); /* 像自带光芒一样 */
+}
+
+.card h2 {
+  margin: 10px 0 20px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #666;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.8;
+  margin: 10px 0;
+}
+
+.signature {
+  margin-top: 24px;
+  font-size: 13px;
+  color: #ff6b81;
+}
+
+/* 提示 */
+.hint {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #999;
+  animation: pulse 1.5s infinite;
+}
+
+/* 动画 */
+@keyframes floatCard {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
+
+/* 漂浮元素 */
+.floating {
+  position: absolute;
+  font-size: 22px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.85;
+}
+
+.heart {
+  left: 20%;
+}
+
+.star {
+  left: 70%;
+}
+
+.delay1 {
+  animation-delay: 2s;
+  left: 35%;
+}
+
+.delay2 {
+  animation-delay: 3.5s;
+  left: 55%;
+}
+
+
+/* 📱 手机优化 */
+@media (max-width: 480px) {
+  .card {
+    padding: 28px 22px;
+  }
+
+  .cake {
+    font-size: 48px;
+  }
+
+  .card h1 {
+    font-size: 22px;
+  }
+}
+
+.photo {
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.photo-wrapper {
+  width: 100%;
+  max-width: 100%;
+  /* ⭐ 防止撑破 */
+  aspect-ratio: 4 / 3;
+  margin-bottom: 16px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.photo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* ⭐ 避免 inline 元素撑布局 */
+}
+
+.floating {
+  position: absolute;
+  bottom: -20px;
+  font-size: 20px;
+  opacity: 0.85;
+  animation: floatUpInCard 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatUpInCard {
+  0% {
+    bottom: -20px;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    bottom: 100%;
+    opacity: 0;
+  }
+}
+
+.heart {
+  left: 15%;
+}
+
+.star {
+  left: 70%;
+}
+
+.delay1 {
+  animation-delay: 1.5s;
+  left: 35%;
+}
+
+.delay2 {
+  animation-delay: 3s;
+  left: 55%;
+}
+
+.floating {
+  z-index: 0;
+}
+
+.card>*:not(.floating) {
+  position: relative;
+  z-index: 1;
+}

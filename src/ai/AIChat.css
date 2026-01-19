@@ -1,0 +1,166 @@
+:root {
+  --bg-color: #f7f9fc;
+  --ai-card-bg: rgba(255, 255, 255, 0.9);
+  --user-card-bg: #e6f7ff;
+  --accent-color: #1890ff;
+}
+
+body {
+  background: var(--bg-color);
+  margin: 0;
+}
+
+/* 主题选择页 */
+.theme-selection-page {
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.theme-item {
+  background: white;
+  padding: 20px 10px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.theme-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.theme-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.theme-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* 游戏容器 */
+.game-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-color);
+}
+
+.game-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 15px 200px;
+}
+
+/* 消息布局 */
+.message-row {
+  margin-bottom: 25px;
+  display: flex;
+}
+
+.row-ai {
+  justify-content: flex-start;
+}
+
+.row-user {
+  justify-content: flex-end;
+}
+
+/* 剧情卡片 */
+.story-card {
+  max-width: 90%;
+  border-radius: 24px !important;
+  border: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+.card-ai {
+  background: var(--ai-card-bg) !important;
+  border-top-left-radius: 4px !important;
+}
+
+.card-user {
+  background: var(--user-card-bg) !important;
+  border-top-right-radius: 4px !important;
+}
+
+.narrative-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #2c3e50;
+}
+
+/* 底部决策面板 */
+.decision-panel {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  padding: 20px 15px;
+  border-radius: 30px 30px 0 0;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.decision-btn {
+  padding: 12px 20px !important;
+  border-radius: 15px !important;
+  white-space: normal !important;
+  text-align: left !important;
+  font-size: 15px !important;
+  border: 1px solid #e8e8e8 !important;
+}
+
+.decision-btn:active {
+  transform: scale(0.98);
+}
+
+/* 移动端 */
+@media (max-width: 600px) {
+  .theme-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .story-card {
+    max-width: 95%;
+  }
+}
+
+
+/* AI 正在输入的动画 */
+.loading-spin {
+  display: block;
+  margin: 20px auto;
+}
+
+/* 按钮样式微调 */
+.decision-btn {
+  background: #fff !important;
+  color: #1890ff !important;
+  border: 1px solid #1890ff !important;
+  transition: all 0.2s !important;
+}
+
+.decision-btn:hover {
+  background: #1890ff !important;
+  color: #fff !important;
+}
