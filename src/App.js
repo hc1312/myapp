@@ -25,7 +25,6 @@ import BreakoutGame from "./game/BreakoutGame";
 import DiceGame from "./dice2";
 import CustomStrategyGame from "./game/CustomStrategyGame";
 import CaptiveChessGame from "./game/CaptiveChessGame";
-import Yala from "./yala";
 import MessageBoard from "./MessageBoard";
 import SnakeGame from "./game/snake";
 import WelcomePage from "./WelcomePage";
@@ -216,7 +215,6 @@ function AppContent() {
           <Routes>
             {/* 公开页面 */}
             <Route path="/" element={<WelcomePage />} />
-            <Route path="/yala" element={<Yala />} />
             <Route path="/NewYearWish" element={<NewYearWish />} />
             <Route path="/WorldCupGroups" element={<WorldCupGroups />} />
             <Route path="/game/snake" element={<SnakeGame />} />
