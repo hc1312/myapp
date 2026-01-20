@@ -1,138 +1,139 @@
 # myapp
 
-一个使用 Create React App 创建的前端单页应用（React）。项目主要使用 JavaScript，集成了 Ant Design、axios、react-chessboard、react-game-engine、react-konva、react-markdown、docx 导出等多种库，适合实现交互式游戏/可视化/文档导出等功能。
+轻量且互动的前端演示应用（基于 Create React App + React + Ant Design）。本项目集合了多个小游戏、交互式仿真、工具与小型 Web 应用，适合作为作品集展示或原型演示站点（部分需要后端服务，后端代码暂未上传）。
+
+[在线演示]() · [下载 ZIP](https://github.com/hc1312/myapp/archive/refs/heads/master.zip) · [Issues](https://github.com/hc1312/myapp/issues)
 
 ---
 
-## 目录
-- [快速开始](#快速开始)
-- [特性（推断）](#特性推断)
-- [技术栈与主要依赖](#技术栈与主要依赖)
-- [项目结构](#项目结构)
-- [可用脚本](#可用脚本)
-- [环境与代理](#环境与代理)
-- [开发建议与注意事项](#开发建议与注意事项)
-- [贡献](#贡献)
-- [许可证](#许可证)
-- [联系方式](#联系方式)
+## 项目简介
+
+myapp 是一个用于演示前端交互能力的单页应用（SPA），集成了棋类、画布交互、小游戏、仿真系统、AI 文字冒险与若干工具类小模块。界面以 Ant Design 为主，兼顾桌面与移动适配，部分路由需要登录并由管理员权限控制。
+
+---
+
+## 项目亮点（按页面 / 路由）
+
+- 首页 — `/`  
+  WelcomePage：项目入口，带粒子背景（ParticleBackground），展示项目概览与快速入口。
+
+- 世界杯管理（需要登录 / 管理员权限）  
+  - `/TeamManagement`：球队信息管理（创建 / 编辑球队数据）。  
+  - `/WorldCupGroups`：分组概览与展示。  
+  - `/MatchManagement`：赛程管理与安排。  
+  权限说明：上述页面通过 PrivateRoute 保护；UserTable 仅在 `userInfo.role === 'admin'` 时显示管理菜单项。
+
+- 游戏娱乐（公开访问）  
+  - `/game/snake` — 贪吃蛇：经典贪吃蛇交互玩法。  
+  - `/game/mole` — 打地鼠：点击类小游戏。  
+  - `/game/Gomoku` — 五子棋：双人/单人对弈界面。  
+  - `/game/BreakoutGame` — 打砖块：基于画布的物理交互。  
+  - `/game/CustomStrategyGame` — 自创棋：自定义规则的策略棋类。  
+  - `/game/TerrainRPSGame` — 地形版：结合地形机制的策略游戏。  
+  - `/CaptiveChessGame` — 俘虏棋（桌面端优化）。  
+  - `/rockpaperscissors` — 石头剪刀布。  
+  - `/dice2` — 掷骰子游戏：用户为每个点数填写动作，投骰子决定动作（参见 src/dice2.js）。
+
+- 运气 / 策略类（轻量互动）  
+  掷骰子 / 石头剪刀布等适合团建或随机决策演示。
+
+- 工具与仿真（部分仅适配桌面端）  
+  - `/Elevator` — 电梯模拟：多层电梯调度与状态可视化（控制面板、统计信息）。  
+  - `/Subway` — 地铁系统模拟：站点与车辆调度仿真。  
+  - `/toy/VirtualShop` — 虚拟商店（需登录）：购物 / 交互演示。  
+  - `/toy/WeChatWindow` — 微信风格聊天窗口：社交界面演示。  
+  - `/album` — 相册回忆（需登录）：图片浏览 / 管理。  
+  - `/messageboard` — 留言板（需登录）：留言与讨论板块。
+
+- AI / 文字冒险  
+  - `/AIChat` — 文字冒险 / AI 对话：主题选择、剧情解析与选项交互（使用 ReactMarkdown 渲染，解析 AI 返回的剧情与选项）。
+
+- 节日 / 特效页面  
+  - `/NewYearWish`：节日祝福/惊喜页面；包含雪花、动画样式（例如 src/Christmas/snow.css）等视觉特效。
+
+- 账户与权限  
+  - `/login` — 登录 / 注册：登录成功后会把 token 与 userInfo 存入 localStorage（含庆祝 confetti 效果）。  
+  - 私有页面通过 PrivateRoute 守卫��未登录会重定向到登录页。
+
+- 小部件示例  
+  - BalanceCard：示例组件，会周期性从后端拉取用户余额（调用 utils/request 的 API），展示前后端交互封装的示例。
 
 ---
 
 ## 快速开始
 
-先确保已安装 Node.js（建议 16+）和 npm。
-
-1. 克隆并进入项目
-   ```bash
-   git clone https://github.com/hc1312/myapp.git
-   cd myapp
-   ```
+1. 克隆仓库
+```bash
+git clone https://github.com/hc1312/myapp.git
+cd myapp
+```
 
 2. 安装依赖
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-3. 本地开发运行
-   ```bash
-   npm start
-   ```
-   打开 http://localhost:3000
+3. 本地启动（开发模式）
+```bash
+npm start
+```
+打开 http://localhost:3000
 
-4. 打包生产
-   ```bash
-   npm run build
-   ```
-
-5. 运行测试（如有）
-   ```bash
-   npm test
-   ```
+4. 构建生产
+```bash
+npm run build
+```
 
 ---
 
-## 特性（推断）
-以下是根据 package.json 的依赖推断出的项目特性，供你核对并在 README 中补充真实功能说明：
-- 使用 Ant Design 作为 UI 组件库（antd）
-- 与后端通信使用 axios
-- 集成棋盘/棋类相关功能（chess.js、react-chessboard）
-- 有游戏引擎或交互式组件（react-game-engine、react-dice-complete）
-- 使用 Konva 进行画布/可视化（react-konva）
-- 支持 Markdown 渲染（react-markdown）
-- 支持 DOCX 或文件导出（docx、file-saver / filesaver）
-- 使用 styled-components 管理样式
+## 项目结构（简要说明）
 
-请根据实际功能替换或扩展以上说明。
-
----
-
-## 技术栈与主要依赖
-关键依赖（节选自 package.json）：
-- react, react-dom, react-scripts
-- antd
-- axios
-- chess.js, react-chessboard
-- react-game-engine, react-dice-complete
-- react-konva
-- react-markdown
-- docx, file-saver
-
-代码主要使用 JavaScript（约 96.7%），少量 CSS/HTML 文件。
+- public/ — 静态资源（favicon、HTML 等）  
+- src/ — 源代码（组件、页面、样式、服务）  
+  - src/game/ — 各类小游戏（snake, mole, Gomoku, Breakout 等）  
+  - src/worldcup/ — 世界杯相关管理页面（TeamManagement、MatchManagement 等）  
+  - src/toy/ — 小型玩具应用（WeChatWindow、VirtualShop 等）  
+  - src/ai/ — AIChat （文字冒险与对话）  
+  - src/Christmas/ — 节日特效页面（雪花等）  
+  - src/utils/ — 请求封装与通用工具（例如 utils/request）  
+  - src/dice2.js — 掷骰子示例页面  
+- setProxy.js — 本地开发代理（如需与后端联调）  
+- webpack.js — 顶层定制/配置脚本（如有特殊构建需求）
 
 ---
 
-## 项目结构（顶层）
-- package.json — 项目依赖与脚本
-- README.md — 本文件
-- .gitignore
-- public/ — 公共静态文件
-- src/ — 源代码目录（组件、样式等）
-- setProxy.js — 本地或开发代理设置（项目内存在此文件）
-- webpack.js — 自定义/辅助 webpack 配置（存在于仓库顶层，可作特殊配置使用）
+## 技术栈与关键依赖
 
-（请在 README 中补充 src/ 的详细目录结构与主要模块描述，例如 components、pages、services、utils 等）
+- React, React Router, Ant Design（UI）  
+- chess.js / react-chessboard（棋类逻辑）  
+- react-konva（画布 / 可视化）  
+- react-game-engine、react-dice-complete（小游戏 / 交互）  
+- react-markdown（剧情 / 文本渲染）  
+- axios（HTTP 请求）及 utils/request 封装  
+- docx、file-saver（文档导出）  
+- canvas-confetti（登录/注册庆祝效果）  
 
----
+代码主要以 JavaScript 编写，少量 CSS/HTML 用于样式与动画（仓库语言构成见 package.json）。
 
-## 可用脚本
-项目使用 Create React App 的默认脚本：
-- `npm start` — 开发服务器（热重载）
-- `npm run build` — 生产构建到 build/ 文件夹
-- `npm test` — 运行测试
-- `npm run eject` — 弹出配置（不可逆）
 
----
+## 开发与贡献
 
-## 环境与代理
-- 如果需要配置 API 地址，建议使用 `.env` 或 `.env.development` 并前缀 `REACT_APP_`（例如 `REACT_APP_API_BASE_URL`）。
-- 仓库中存在 `setProxy.js`，可能用于本地代理或开发配置，请查看该文件并根据需要启动或修改代理设置。
+欢迎贡献：  
+- 提交 Issue（功能建议/Bug）  
+- Fork -> 新分支 -> 提交 PR（请在 PR 描述中列出改动与演示截图）  
+- 建议添加 CONTRIBUTING.md、ISSUE_TEMPLATE、PULL_REQUEST_TEMPLATE 以规范协作流程
 
----
-
-## 开发建议与注意事项
-- 若使用 Ant Design，建议按需引入或配置按需加载以减小打包体积（可结合 babel-plugin-import 或 antd 的按需方案）。
-- 若有第三方大型库（react-konva、react-chessboard 等），注意性能与懒加载策略。
-- 增加 CI（例如 GitHub Actions）用于自动化测试与构建。
-- 在 README 中加入演示截图或部署链接（如 GitHub Pages / Vercel / Netlify）会更容易让别人理解项目。
-- 为导出（docx/file-saver）相关功能添加使用示例与说明。
-
----
-
-## Contributing
-欢迎贡献！建议补充：
-1. CONTRIBUTING.md — 贡献指南
-2. ISSUE_TEMPLATE & PULL_REQUEST_TEMPLATE — 提高协作效率
-3. 代码规范（ESLint / Prettier）和分支策略说明
-
-简单贡献流程：
-- Fork -> 新分支 -> 提交 -> 发起 PR -> 通过代码审查后合并
+要添加页面：在 `src/` 新建模块并在 `src/App.js` 中注册路由与菜单项（示例已在 App.js 中体现）。
 
 ---
 
 ## 许可证
-在仓库中添加 LICENSE 文件（例如 MIT）以明确开源许可。当前仓库未在 README 中声明许可（请补充）。
+
+建议使用 MIT 许可证；如需我可以为仓库添加 LICENSE 文件并提交。
 
 ---
 
 ## 联系方式
-如果你需要我把这个 README 直接提交到仓库（创建 PR 或直接 push 到某个分支），或者希望 README 中包含更详细的功能说明、截图、部署步骤，请告诉我你要我做的具体操作与许可（例如是否直接修改 master/main 分支）。
+
+维护者：hc1312  
+问题与建议：请在仓库 Issue 提交
